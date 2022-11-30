@@ -1,5 +1,6 @@
 import db from "./app/config/db.js";
 import express from "express";
+import game from './app/routes/game.js';
 import player from './app/routes/player.js';
 
 const app = express();
@@ -13,6 +14,7 @@ app.get( "/", ( req, res ) => {
 } )
 
 app.use('/', player)
+app.use('/', game)
 
 app.listen( port, () => {
   console.log( `El servidor esta funcionando en el puerto: ${ port }` );
@@ -22,7 +24,7 @@ try{
     await db.authenticate() 
     console.log( 'Conexión Correcta con la Base de Datos' )
 
-    // db.sync({force:false})
+    db.sync({})
     console.log('La Base de Datos está sincronizada')
 } catch ( error ) {
     console.log( error )
