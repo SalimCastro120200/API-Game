@@ -2,11 +2,18 @@ import db from "./app/config/db.js";
 import express from "express";
 import game from './app/routes/game.js';
 import player from './app/routes/player.js';
+import stats from './app/routes/stats.js';
+
+// import cors from "cor"
+
+
 
 const app = express();
+// const cors = require('cors');
 const port = process.env.PORT || 5000;
 
 app.use( express.json() );
+// app.use(cors());
 app.use( express.urlencoded( { extended: true } ) );
 
 app.get( "/", ( req, res ) => {
@@ -15,6 +22,7 @@ app.get( "/", ( req, res ) => {
 
 app.use('/', player)
 app.use('/', game)
+app.use('/', stats)
 
 app.listen( port, () => {
   console.log( `El servidor esta funcionando en el puerto: ${ port }` );

@@ -15,6 +15,7 @@ const findGameByID = async ( req, res ) => {
 
 const findAllGames = async ( req, res ) => {
     const allGames = await Game.findAll();
+    // const allGames = await Game.findAll({include: "tb_players"});
     res.json( allGames );
     return false;
 }
@@ -86,32 +87,32 @@ const deleteGameByID = async ( req, res ) => {
 
 const findAllGamesByPlayer = async ( req, res ) => {
     const { nickname } = req.params;
-    const game = await Game.findOne({ 
+    const games = await Game.findAll({ 
       where: { nickname } 
     });
   
-    if ( !game ) {
+    if ( !games ) {
       return res.status( 404 ).json({
         mensaje: `No existe el jugador con el NICKNAME: ${nickname}.`
       });
     } 
   
-    res.json( player )
+    res.json( games )
 };
 
 const findAllGamesByPlayerNickname = async ( req, res ) => {
     const { nickname } = req.params;
-    const game = await Game.findOne({ 
+    const games = await Game.findAll({ 
       where: { nickname } 
     });
   
-    if ( !game ) {
+    if ( !games ) {
       return res.status( 404 ).json({
         mensaje: `No existe el jugador con el NICKNAME: ${nickname}.`
       });
     } 
   
-    res.json( player )
+    res.json( games )
 };
 
 
