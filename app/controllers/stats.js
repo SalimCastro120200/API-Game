@@ -5,6 +5,20 @@ const viewHighScores = async( req, res ) => {
     res.json({highscores: highscores[0]});
 };
 
+const viewRecentGames = async( req, res ) => {
+    const {nickname} = req.params;
+    const recentGames = await Game.sequelize.query(`SELECT * FROM vw_highscores WHERE player="${nickname}" ORDER BY ENDED DESC`);
+    res.json({recentGames: recentGames[0]});
+};
+
+
+const viewLeaderboard = async( req, res ) => {
+    const leaderboard = await Game.sequelize.query('SELECT * FROM vw_leaderboard');
+    res.json({leaderboard: leaderboard[0]});
+};
+
 export {
-    viewHighScores
+    viewHighScores,
+    viewRecentGames,
+    viewLeaderboard
 };

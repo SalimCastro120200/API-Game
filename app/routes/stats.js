@@ -1,8 +1,11 @@
+import { viewHighScores, viewLeaderboard, viewRecentGames } from '../controllers/stats.js';
+
 import express from 'express';
-import { viewHighScores } from '../controllers/stats.js';
 
 const router = express.Router();
 
-router.get("/stats/highscores/", viewHighScores)
+router.get("/stats/highscores/", viewHighScores),
+router.get("/stats/recentgames/:nickname", viewRecentGames),
+router.get("/stats/leaderboard/", viewLeaderboard)
 
 export default router;
